@@ -6,7 +6,7 @@ var data;
 function newrequest(){
 	var request = new XMLHttpRequest();
 	
-    request.open('GET', '/api/newkakezan/?range=99&num=3', true);
+    request.open('GET', '/api/newkakezan/?range=13&num=4', true);
     request.responseType = 'json';
  
     request.onload = function () {
