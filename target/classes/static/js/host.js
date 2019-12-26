@@ -144,7 +144,6 @@ var sketch = function(p5) {
 				if(usersdata[i].ID==id){
 					if(usersdata[i].reset){
 						reset();
-						ans=0;
 						newrequest();
 					}
 					userindex=i;
@@ -179,6 +178,10 @@ var sketch = function(p5) {
 	    	}
     		ans=0;
     		
+	    }
+	    if(isPress(32)){
+	    	allreset();
+    		ans=0;
 	    }
 	    if(ans!=0)
 	    	p5.text(ans,width/2,height*5/7);
