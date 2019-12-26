@@ -168,6 +168,7 @@ var sketch = function(p5) {
 			var c = p5.color(255,255,255);
 			p5.fill(c);
 		}
+	    p5.textAlign(p5.CENTER);
 	    p5.textSize(64);
 	    if(isPress(13)){
 	    	if(ans===trueans){
