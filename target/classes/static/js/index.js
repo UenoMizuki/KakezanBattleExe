@@ -59,6 +59,7 @@ function init() {
 	// 初回実行
 	tick();
 	function tick() {
+	  	keyupdate();
 		requestAnimationFrame(tick);
 		color = (++color) % 600;
 
@@ -92,8 +93,12 @@ function init() {
 		box.rotation.x += 0.01;
 		box.rotation.y += 0.01;
 		box.rotation.z += 0.005;
-
+		if(isPress(13)){
+			window.location.href ='./game';
+		}
 		// レンダリング
 		renderer.render(scene, camera);
+
+		
 	}
 }

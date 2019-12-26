@@ -3,6 +3,21 @@ var ans=0,trueans=0;
 var isDrawable=false;
 
 var data;
+var id;
+function newIDrequest(){
+	var request = new XMLHttpRequest();
+	
+    request.open('GET', '/api/makeid', true);
+    request.responseType = 'json';
+ 
+    request.onload = function () {
+      id=this.response.id;
+      console.log(this.response);
+      
+    };
+    request.send();
+}
+newIDrequest();
 function newrequest(){
 	var request = new XMLHttpRequest();
 	
@@ -43,7 +58,7 @@ var sketch = function(p5) {
 	    }
 	  	if(isDrawable){
 		  p5.background(0);
-
+		  
 	    //console.log(data);
 	    /*p5.stroke(0, 255, 0);
 	    p5.fill(0);
