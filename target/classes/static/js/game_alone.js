@@ -146,7 +146,6 @@ var sketch = function(p5) {
 						reset();
 						ans=0;
 						newrequest();
-					    p5.textAlign(p5.CENTER);
 					}
 					userindex=i;
 				}else if(i==usersdata.length-1){
