@@ -1,11 +1,12 @@
 var width = 960,height=560;
 var ans=0,trueans=0;
 var isDrawable=false;
-
 var data;
 var usersdata;
 var id;
+var now = new Date();
 var timer=0;
+var isResetable=true;
 var username = window.prompt("名前を入力して下さい");
 function newIDrequest(){
 	var request = new XMLHttpRequest();
@@ -34,6 +35,11 @@ function newrequest(){
     	  trueans*=data.value[i];
       }
       isDrawable=true;
+      if(isResetable){
+    	  console.log("reset");
+    	  now=new Date();
+    	  isResetable=false;
+      }
     };
  
     request.send();
@@ -48,9 +54,7 @@ function update(){
     request.onload = function () {
 	  usersdata=this.response;
     };
- 
     request.send();
-	
 }
 function reset(){
 	var request = new XMLHttpRequest();
@@ -72,6 +76,7 @@ function allreset(){
     request.responseType = 'json';
  
     request.onload = function () {
+    	//now = new Date();
       //console.log(this.response);
     };
  
@@ -132,6 +137,7 @@ var sketch = function(p5) {
 	    	text+=" × "+data.value[i];
 	    }
 	    p5.textSize(64);
+	    p5.text(((new Date()).getTime()-now.getTime())/1000,width/2,height/7);
 		p5.text(text,width/2,height*3/7);
 
 		p5.rect(width*7/8-5, height/15, 10, height*13/15);
@@ -181,6 +187,7 @@ var sketch = function(p5) {
     		
 	    }
 	    if(isPress(32)){
+    		isResetable=true;
 	    	allreset();
     		ans=0;
 	    }
