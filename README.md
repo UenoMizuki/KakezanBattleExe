@@ -1,2 +1,2 @@
 # KakezanBattleExe
-sigma1023.work/game
+sigma1023.work:8080/game
