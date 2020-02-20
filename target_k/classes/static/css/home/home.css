@@ -1,0 +1,11 @@
+p {
+	margin: 0;
+	padding: 16px;
+	font-size: 1em;
+	text-align: center;
+	background: #fff;
+	transition: font-size 1s;
+}
+p:hover {
+	font-size: 2em;
+}

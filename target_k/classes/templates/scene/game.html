@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <!-- three.jsを読み込む -->
+  <!-- index.jsを読み込む -->
+</head>
+<body>
+<canvas id="myCanvas"></canvas>
+
+  <script src="../static/js/processing.js" th:src="@{/js/processing.js}"></script>
+  <script src="../static/js/KeyManager.js" th:src="@{/js/KeyManager.js}"></script>
+  <script src="../static/js/game_alone.js" th:src="@{/js/game_alone.js}"></script>
+  <p>
+  	表示される問題の計算結果を入力しEnterを押してください。<br>
+  	回答があっていれば次の問題に進みます。間違っていればもう一度同じ問題を解きます。<br>
+  	13問早く解いた人の勝ちです。
+  </p>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ 	<meta charset="UTF-8" />
+</head>
+<body>
+	<div id="pixiview"></div>
+	<form id="name" onsubmit="return false;">Name
+  		<input type="text" maxlength="10" name="nametext">
+  		<input type="button" value="送信" onclick="setName()">
+  	</form>
+  	<form id="host">
+		<input type="radio" name="host" id="hostcheck" value="true" onclick="getRadioStatus()"> Host
+		<input type="radio" name="host" value="false" onclick="getRadioStatus()" checked> Client
+	</form>
+	<form id="gamemode">ゲームモード
+		<br>
+		<input type="radio" name="gamemode" value="false" onclick="getRadioStatus()"> Participant
+		<input type="radio" name="gamemode" value="true" onclick="getRadioStatus()" checked> Spectator
+	</form>
+	<script src="../static/js/pixi.js" th:src="@{/js/pixi.js}"></script>
+  	<script src="../static/js/KeyManager.js" th:src="@{/js/KeyManager.js}"></script>
+  	<script src="../static/js/rampro/rampro.js" th:src="@{/js/rampro/rampro.js}"></script>
+
+</body>
+</html>
