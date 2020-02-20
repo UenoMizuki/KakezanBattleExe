@@ -1,104 +1,52 @@
-window.addEventListener("DOMContentLoaded", init);
-
-function init() {
-	const width = 960;
-	const height = 540;
-
-	// レンダラーを作成
-	const renderer = new THREE.WebGLRenderer({
-		canvas : document.querySelector("#myCanvas")
-	});
-	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(width, height);
-
-	// シーンを作成
-	const scene = new THREE.Scene();
-
-	// カメラを作成
-	const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-	camera.position.set(0, 0, +1000);
-
-	// 箱を作成
-	const geometry = new THREE.BoxGeometry(500, 500, 500);
-	const material = new THREE.MeshStandardMaterial({
-		color : 0x0000ff
-	});
-	const box = new THREE.Mesh(geometry, material);
-	scene.add(box);
-
-	var textBoardObject = new TextBoardObject({
-		fontSize : 80, // [%]
-		textColor : {
-			r : 1,
-			g : 1,
-			b : 1,
-			a : 1
-		},// 文字色
-		backgroundColor : {
-			r : 1,
-			g : 1,
-			b : 1,
-			a : 0.1
-		},// 背景色（RGBA値を0から１で指定）
-		boardWidth : 100, // マッピング対象平面オブジェクトの横幅
-		boardHeight : 100, // マッピング対象平面オブジェクトの縦幅
-
-		fontName : "Times New Roman"
-	});
-	textBoardObject.addTextLine("Hello", 1, 1);
-	scene.add(textBoardObject);
-
-	// 平行光源
-	const light = new THREE.DirectionalLight(0xffffff);
-	light.intensity = 2; // 光の強さを倍に
-	light.position.set(0, 0, 10);
-	// シーンに追加
-	scene.add(light);
-
-	var color = 0;
-	// 初回実行
-	tick();
-	function tick() {
-	  	keyupdate();
-		requestAnimationFrame(tick);
-		color = (++color) % 600;
-
-		if (color < 100) {
-			material.color.r = 1;
-			material.color.g = color / 100;
-			material.color.b = 0;
-		} else if (color < 200) {
-			material.color.r = 1-(color%100)/100;
-			material.color.g = 1;
-			material.color.b = 0;
-		} else if (color < 300) {
-			material.color.r = 0;
-			material.color.g = 1;
-			material.color.b = (color%100)/100;
-		} else if (color < 400) {
-			material.color.r = 0;
-			material.color.g = 1-(color%100) / 100;
-			material.color.b = 1;
-		} else if (color < 500) {
-			material.color.r = (color%100)/100;
-			material.color.g = 0;
-			material.color.b = 1;
-		} else {
-			material.color.r = 1;
-			material.color.g = 0;
-			material.color.b = 1-(color%100)/100;
-		}
-
-		// 箱を回転させる
-		box.rotation.x += 0.01;
-		box.rotation.y += 0.01;
-		box.rotation.z += 0.005;
-		if(isPress(13)){
-			window.location.href ='./game';
-		}
-		// レンダリング
-		renderer.render(scene, camera);
-
-		
-	}
-}
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Phaser = __importStar(require("phaser"));
+var preload_1 = require("./src/scenes/preload");
+var game_1 = require("./src/scenes/game");
+// Phaser3のゲームクラスの記述（Phaser.Gameクラスを継承したMainクラスの記述）
+var Main = /** @class */ (function (_super) {
+    __extends(Main, _super);
+    function Main() {
+        var _this = this;
+        // Phaser.Gameのコンフィグ
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+        };
+        _this = _super.call(this, config) || this; // Phaser.Gameクラスにコンフィグを渡す
+        // シーンにキーを割り振って登録
+        _this.scene.add("preload", preload_1.Preload, false);
+        _this.scene.add("game", game_1.Game, false);
+        // シーンをスタート
+        _this.scene.start("preload");
+        return _this;
+    }
+    return Main;
+}(Phaser.Game));
+// ブラウザでDOM描写終了直後に呼び出される
+window.onload = function () {
+    // Mainクラスのインスタンスを生成（ここで初めてゲームが生成）
+    var GameApp = new Main();
+};
+//# sourceMappingURL=index.js.map
